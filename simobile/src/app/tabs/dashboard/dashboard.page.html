@@ -1,13 +1,56 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>dashboard</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">dashboard</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <p class="tanggal">Ringkasan hari ini, {{ today | date: 'dd MMMM yyyy' }}</p>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card class="summary-card" color="primary">
+          <ion-card-content>
+            <ion-icon name="cube-outline"></ion-icon>
+            <h1>{{ totalProduk }}</h1>
+            <p>Jumlah Produk</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="summary-card" color="secondary">
+          <ion-card-content>
+            <ion-icon name="receipt-outline"></ion-icon>
+            <h1>{{ totalTransaksiHariIni }}</h1>
+            <p>Transaksi Hari Ini</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-card class="summary-card" color="tertiary">
+          <ion-card-content>
+            <ion-icon name="cash-outline"></ion-icon>
+            <h1>Rp {{ omzetHariIni | number }}</h1>
+            <p>Omzet Hari Ini</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item lines="none" class="best-seller">
+    <ion-icon name="star" slot="start" color="warning"></ion-icon>
+    <ion-label>
+      <h2>Produk Terlaris Hari Ini</h2>
+      <p>{{ produkTerlaris }}</p>
+    </ion-label>
+  </ion-item>
 </ion-content>
