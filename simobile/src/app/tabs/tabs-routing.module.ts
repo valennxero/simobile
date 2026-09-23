@@ -4,60 +4,66 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardPageModule),
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'produk',
+        loadChildren: () => import('./produk/produk.module').then((m) => m.ProdukPageModule),
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'produk/detail/:id',
+        loadChildren: () =>
+          import('./produk/produk-detail/produk-detail.module').then((m) => m.ProdukDetailPageModule),
+      },
+      {
+        path: 'produk/form',
+        loadChildren: () =>
+          import('./produk/produk-form/produk-form.module').then((m) => m.ProdukFormPageModule),
+      },
+      {
+        path: 'produk/form/:id',
+        loadChildren: () =>
+          import('./produk/produk-form/produk-form.module').then((m) => m.ProdukFormPageModule),
+      },
+      {
+        path: 'keranjang',
+        loadChildren: () => import('./keranjang/keranjang.module').then((m) => m.KeranjangPageModule),
+      },
+      {
+        path: 'transaksi',
+        loadChildren: () => import('./transaksi/transaksi.module').then((m) => m.TransaksiPageModule),
+      },
+      {
+        path: 'transaksi/detail/:id',
+        loadChildren: () =>
+          import('./transaksi/transaksi-detail/transaksi-detail.module').then(
+            (m) => m.TransaksiDetailPageModule
+          ),
+      },
+      {
+        path: 'profil',
+        loadChildren: () => import('./profil/profil.module').then((m) => m.ProfilPageModule),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
-      }
-    ]
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+    ],
+  },  {
+    path: 'produk',
+    loadChildren: () => import('./produk/produk.module').then( m => m.ProdukPageModule)
   },
-  {
-    path: '',
-    redirectTo: '/tabs/tab1',
-    pathMatch: 'full'
-  },
-  {
-    path: 'produk-detail',
-    loadChildren: () => import('./produk/produk-detail/produk-detail.module').then( m => m.ProdukDetailPageModule)
-  },
-  {
-    path: 'dashboard',
-    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
-  },
-  {
-    path: 'produk-form',
-    loadChildren: () => import('./produk/produk-form/produk-form.module').then( m => m.ProdukFormPageModule)
-  },
-  {
-    path: 'keranjang',
-    loadChildren: () => import('./keranjang/keranjang.module').then( m => m.KeranjangPageModule)
-  },
-  {
-    path: 'transaksi',
-    loadChildren: () => import('./transaksi/transaksi.module').then( m => m.TransaksiPageModule)
-  },
-  {
-    path: 'profil',
-    loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
-  }
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class TabsPageRoutingModule {}
