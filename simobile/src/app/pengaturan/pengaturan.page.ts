@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Theme } from '../services/theme';
+import { ThemeService } from '../services/theme';
 
 @Component({
   selector: 'app-pengaturan',
@@ -8,7 +8,7 @@ import { Theme } from '../services/theme';
   standalone: false,
 })
 export class PengaturanPage {
-  constructor(public themeService: Theme) {}
+  constructor(public themeService: ThemeService) {}
 
   onToggleDarkMode() {
     this.themeService.toggleDarkMode();
