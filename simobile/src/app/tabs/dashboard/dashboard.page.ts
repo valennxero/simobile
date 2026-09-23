@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../../services/product';
+import { Transaction } from '../../services/transaction';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,10 +9,27 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class DashboardPage implements OnInit {
+  // Nilai-nilai berikut dihitung oleh service lalu ditampilkan dengan interpolation binding di HTML
+  totalProduk = 0;
+  totalTransaksiHariIni = 0;
+  omzetHariIni = 0;
+  produkTerlaris = '-';
+  today = new Date();
 
-  constructor() { }
+  constructor(private productService: Product, private transactionService: Transaction) {}
 
   ngOnInit() {
+    this.refresh();
   }
 
+  ionViewWillEnter() {
+    this.refresh();
+  }
+
+  refresh() {
+    this.totalProduk = this.productService.getAll().length;
+    this.totalTransaksiHariIni = this.transactionService.getTodayCount();
+    this.omzetHariIni = this.transactionService.getTodayTotal();
+    this.produkTerlaris = this.transactionService.getBestSellerToday();
+  }
 }

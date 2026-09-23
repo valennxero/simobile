@@ -6,14 +6,6 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <div class="menu-brand">
-        <ion-icon name="storefront-outline"></ion-icon>
-        <div>
-          <h2>SIMOBILE</h2>
-          <p>Toko Makmur Jaya</p>
-        </div>
-      </div>
-
       <ion-list lines="none">
         <ion-menu-toggle auto-hide="false">
           <ion-item routerLink="/tabs/dashboard" routerDirection="root" detail="false">
@@ -47,5 +39,6 @@
     </ion-content>
   </ion-menu>
 
+  <!-- Ini yang jadi "isi" halaman, tempat semua page (termasuk tabs) dirender -->
   <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>
