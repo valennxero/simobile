@@ -4,3 +4,4 @@
 4. type npm install (first time)
 5. type ionic serve
 6. you can see the app
+7. Halo dari niko
