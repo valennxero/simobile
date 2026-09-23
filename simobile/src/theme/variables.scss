@@ -1,2 +1,68 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+/*
+ * SIMOBILE custom theme
+ * Identitas warna Toko Makmur Jaya: hijau (fresh, kelontong) & kuning (hangat, murah meriah)
+ * Light mode (default) + Dark mode (class-based, toggle lewat halaman Pengaturan)
+ */
+
+:root {
+  /* Primary: hijau toko */
+  --ion-color-primary: #2e7d32;
+  --ion-color-primary-rgb: 46, 125, 50;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #286e2c;
+  --ion-color-primary-tint: #438a47;
+
+  /* Secondary: kuning toko */
+  --ion-color-secondary: #f9a825;
+  --ion-color-secondary-rgb: 249, 168, 37;
+  --ion-color-secondary-contrast: #1c1c1c;
+  --ion-color-secondary-contrast-rgb: 28, 28, 28;
+  --ion-color-secondary-shade: #db9421;
+  --ion-color-secondary-tint: #faaf3c;
+
+  --ion-color-tertiary: #558b2f;
+  --ion-color-tertiary-rgb: 85, 139, 47;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #4b7a29;
+  --ion-color-tertiary-tint: #669744;
+
+  --ion-color-success: #388e3c;
+  --ion-color-warning: #f9a825;
+  --ion-color-danger: #c62828;
+
+  --ion-background-color: #fbfbf3;
+  --ion-text-color: #1c1c1c;
+  --ion-toolbar-background: var(--ion-color-primary);
+  --ion-toolbar-color: #ffffff;
+  --ion-item-background: #ffffff;
+}
+
+/*
+ * Dark mode: diaktifkan lewat class "dark" pada <body>
+ * (toggle dari halaman Pengaturan menggunakan ThemeService)
+ */
+body.dark {
+  --ion-background-color: #121212;
+  --ion-background-color-rgb: 18, 18, 18;
+  --ion-text-color: #f1f1f1;
+  --ion-text-color-rgb: 241, 241, 241;
+
+  --ion-color-primary: #66bb6a;
+  --ion-color-primary-contrast: #05280a;
+  --ion-color-primary-shade: #5aa35e;
+  --ion-color-primary-tint: #76c17a;
+
+  --ion-color-secondary: #ffca28;
+  --ion-color-secondary-contrast: #1c1c1c;
+
+  --ion-toolbar-background: #1e1e1e;
+  --ion-toolbar-color: #ffca28;
+  --ion-item-background: #1e1e1e;
+  --ion-border-color: #2c2c2c;
+
+  --ion-card-background: #1e1e1e;
+}
