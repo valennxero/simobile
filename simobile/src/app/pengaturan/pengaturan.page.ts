@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ThemeService } from '../services/theme';
 
 @Component({
   selector: 'app-pengaturan',
@@ -6,11 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pengaturan.page.scss'],
   standalone: false,
 })
-export class PengaturanPage implements OnInit {
+export class PengaturanPage {
+  constructor(public themeService: ThemeService) {}
 
-  constructor() { }
-
-  ngOnInit() {
+  onToggleDarkMode() {
+    this.themeService.toggleDarkMode();
   }
-
 }

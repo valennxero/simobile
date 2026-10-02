@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-tentang',
@@ -6,11 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tentang.page.scss'],
   standalone: false,
 })
-export class TentangPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class TentangPage {
+  appVersion = '1.0.0';
 }

@@ -12,6 +12,10 @@ const routes: Routes = [
   {
     path: 'tentang',
     loadChildren: () => import('./tentang/tentang.module').then( m => m.TentangPageModule)
+  },
+  {
+    path: 'models',
+    loadChildren: () => import('./models/models.module').then( m => m.ModelsPageModule)
   }
 
 ];

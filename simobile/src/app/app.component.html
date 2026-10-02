@@ -1,3 +1,51 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menu List</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div class="menu-brand">
+        <ion-icon name="storefront-outline"></ion-icon>
+        <div>
+          <h2>SIMOBILE</h2>
+          <p>Toko Makmur Jaya</p>
+        </div>
+      </div>
+
+      <ion-list lines="none">
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/tabs/dashboard" routerDirection="root" detail="false">
+            <ion-icon name="home-outline" slot="start"></ion-icon>
+            <ion-label>Dashboard</ion-label>
+          </ion-item>
+
+          <ion-item routerLink="/pengaturan" routerDirection="forward" detail="false">
+            <ion-icon name="settings-outline" slot="start"></ion-icon>
+            <ion-label>Pengaturan</ion-label>
+          </ion-item>
+
+          <ion-item routerLink="/tentang" routerDirection="forward" detail="false">
+            <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+            <ion-label>Tentang Aplikasi</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-item id="logout-trigger" button detail="false">
+          <ion-icon name="log-out-outline" slot="start" color="danger"></ion-icon>
+          <ion-label color="danger">Logout</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-alert
+        trigger="logout-trigger"
+        header="Konfirmasi Logout"
+        message="Apakah Anda yakin ingin keluar dari aplikasi?"
+        [buttons]="logoutButtons"
+      ></ion-alert>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>
