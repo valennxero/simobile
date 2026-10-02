@@ -1,13 +1,61 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>produk-detail</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/produk"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail Produk</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tabs/produk/form/{{ id }}">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">produk-detail</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding" *ngIf="produk; else notfound">
+  <div class="detail-image">
+    <img [src]="produk.imageUrl || defaultImage" alt="{{ produk.name }}" />
+  </div>
+
+  <h1>{{ produk.name }}</h1>
+  <ion-chip color="tertiary">{{ produk.category }}</ion-chip>
+
+  <ion-list lines="full" inset="true">
+    <ion-item>
+      <ion-label>Stok Tersisa</ion-label>
+      <ion-badge slot="end" [color]="produk.stock === 0 ? 'danger' : 'success'">
+        {{ produk.stock }}
+      </ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label>Harga Beli</ion-label>
+      <ion-text slot="end">Rp {{ produk.buyPrice | number }}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Harga Jual</ion-label>
+      <ion-text slot="end"><b>Rp {{ produk.sellPrice | number }}</b></ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Estimasi Untung / item</ion-label>
+      <ion-text slot="end" [ngStyle]="{ color: untung >= 0 ? 'var(--ion-color-success)' : 'var(--ion-color-danger)' }">
+        Rp {{ untung | number }}
+      </ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-button
+    expand="block"
+    color="secondary"
+    [disabled]="produk.stock === 0"
+    (click)="addToCart()"
+  >
+    <ion-icon slot="start" name="cart-outline"></ion-icon>
+    {{ produk.stock === 0 ? 'Stok Habis' : 'Tambah ke Keranjang' }}
+  </ion-button>
 </ion-content>
+
+<ng-template #notfound>
+  <ion-content class="ion-padding">
+    <p>Produk tidak ditemukan.</p>
+  </ion-content>
+</ng-template>
