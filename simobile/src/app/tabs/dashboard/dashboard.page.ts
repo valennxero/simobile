@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product';
 import { TransactionService } from '../../services/transaction';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +17,7 @@ export class DashboardPage implements OnInit {
   produkTerlaris = '-';
   today = new Date();
 
-  constructor(private productService: ProductService, private transactionService: TransactionService) {}
+  constructor(private productService: ProductService, private transactionService: TransactionService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.refresh();
@@ -24,6 +25,7 @@ export class DashboardPage implements OnInit {
 
   ionViewWillEnter() {
     this.refresh();
+    this.cdr.detectChanges();
   }
 
   refresh() {
