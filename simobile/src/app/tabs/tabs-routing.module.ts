@@ -56,11 +56,6 @@ const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'produk',
-    loadChildren: () => import('./produk/produk.module').then( m => m.ProdukPageModule)
-  },
-
 ];
 
 @NgModule({

@@ -29,12 +29,12 @@
 
 <ion-content [fullscreen]="true">
   <ion-list *ngIf="produkList.length > 0; else kosong">
-    <ion-item *ngFor="let p of produkList" button routerLink="/tabs/produk/detail/{{ p.id }}" detail="true">
-      <ion-thumbnail slot="start">
+    <ion-item *ngFor="let p of produkList" detail="true">
+      <ion-thumbnail slot="start" (click)="goDetail(p.id)">
         <img [src]="p.imageUrl || defaultImage" alt="{{ p.name }}" />
       </ion-thumbnail>
 
-      <ion-label>
+      <ion-label (click)="goDetail(p.id)">
         <h2>{{ p.name }}</h2>
         <p>{{ p.category }} &middot; Stok: {{ p.stock }}</p>
         <p><b>Rp {{ p.sellPrice | number }}</b></p>

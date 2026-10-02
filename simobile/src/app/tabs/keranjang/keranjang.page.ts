@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { CartService } from '../../services/cart';
 import { TransactionService } from '../../services/transaction';
 
@@ -10,13 +11,12 @@ import { TransactionService } from '../../services/transaction';
   standalone: false,
 })
 export class KeranjangPage {
-  showSuccess = false;
-
   constructor(
     public cartService: CartService,
     private transactionService: TransactionService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private alertController: AlertController
+  ) { }
 
   increase(id: number) {
     this.cartService.increaseQty(id);
@@ -26,20 +26,29 @@ export class KeranjangPage {
     this.cartService.decreaseQty(id);
   }
 
-  // dipanggil dari ion-item-sliding (animasi swipe-to-delete)
   remove(id: number) {
     this.cartService.removeFromCart(id);
   }
 
-  checkout() {
+  async checkout() {
     if (this.cartService.getItems().length === 0) return;
+
     this.transactionService.checkout(this.cartService.getItems());
     this.cartService.clearCart();
-    this.showSuccess = true;
-  }
 
-  goToRiwayat() {
-    this.showSuccess = false;
-    this.router.navigate(['/tabs/transaksi']);
+    const alert = await this.alertController.create({
+      header: 'Transaksi Berhasil',
+      message: 'Transaksi telah disimpan ke riwayat.',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.router.navigate(['/tabs/transaksi']);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }
