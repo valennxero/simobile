@@ -30,6 +30,7 @@ export class TransactionService {
     };
 
     this.transactions.unshift(trx);
+    console.log('checkout: jumlah transaksi =', this.transactions.length);
 
     // Kurangi stok produk sesuai barang yang terjual
     cartItems.forEach((ci) => this.productService.reduceStock(ci.product.id, ci.qty));

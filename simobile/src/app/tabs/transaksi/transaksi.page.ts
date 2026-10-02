@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Transaction } from '../../models/transaction';
 import { TransactionService } from '../../services/transaction';
 
@@ -11,9 +11,13 @@ import { TransactionService } from '../../services/transaction';
 export class TransaksiPage {
   riwayat: Transaction[] = [];
 
-  constructor(private transactionService: TransactionService) {}
+  constructor(
+    private transactionService: TransactionService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ionViewWillEnter() {
     this.riwayat = this.transactionService.getAll();
+    this.cdr.detectChanges();
   }
 }
