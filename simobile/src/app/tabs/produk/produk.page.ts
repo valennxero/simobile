@@ -52,6 +52,9 @@ export class ProdukPage implements OnInit {
 
     // animasi kecil saat item masuk keranjang (bump pada ikon keranjang)
     this.justBumped = true;
-    setTimeout(() => (this.justBumped = false), 350);
+         setTimeout(() => {
+       this.justBumped = false;
+       this.cdr.detectChanges();
+     }, 350);
   }
 }
