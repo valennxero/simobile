@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <p align="center">
   <img src="docs/banner.svg" alt="SIMOBILE - Aplikasi Kasir Mobile Toko Makmur Jaya" width="100%">
 </p>
@@ -266,7 +265,6 @@ SIMOBILE adalah prototipe aplikasi kasir mobile untuk usaha kelontong **Toko Mak
 
 Dibuat untuk **UTS Hybrid Mobile Programming (Gasal 2026/27)** menggunakan **Ionic Angular**.
 
->>>>>>> 8418b478bb93f62d47be131820686a9d3b6bfa1d
 ## Anggota Kelompok
 
 **Kelompok The Dark Side of The Moon**
@@ -278,7 +276,6 @@ Dibuat untuk **UTS Hybrid Mobile Programming (Gasal 2026/27)** menggunakan **Ion
 | Nicholas Davian | 160424070 |
 | Matthew Lenky | 160424055 |
 
-<<<<<<< HEAD
 <p align="center">
   <sub>Dibuat dengan Ionic Angular untuk UTS Hybrid Mobile Programming, Gasal 2026/27</sub>
 </p>
@@ -414,4 +411,3 @@ simobile/                      <- root repository
         │   └── tentang/       <- halaman tentang aplikasi
         └── theme/variables.scss   <- palet warna dan dark mode
 ```
->>>>>>> 8418b478bb93f62d47be131820686a9d3b6bfa1d
