@@ -8,9 +8,58 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">keranjang</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list *ngIf="cartService.getItems().length > 0; else kosong">
+    <p class="hint ion-padding-horizontal">Geser item ke kiri untuk menghapus</p>
+
+    <ion-item-sliding *ngFor="let item of cartService.getItems()">
+      <ion-item>
+        <ion-label>
+          <h2>{{ item.product.name }}</h2>
+          <p>Rp {{ item.product.sellPrice | number }} x {{ item.qty }}</p>
+        </ion-label>
+
+        <div slot="end" class="qty-control">
+          <ion-button size="small" fill="clear" (click)="decrease(item.product.id)">
+            <ion-icon slot="icon-only" name="remove-circle-outline"></ion-icon>
+          </ion-button>
+          <span>{{ item.qty }}</span>
+          <ion-button size="small" fill="clear" (click)="increase(item.product.id)">
+            <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="remove(item.product.id)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ng-template #kosong>
+    <div class="empty-state">
+      <ion-icon name="cart-outline"></ion-icon>
+      <p>Keranjang masih kosong</p>
+    </div>
+  </ng-template>
 </ion-content>
+
+<ion-footer *ngIf="cartService.getItems().length > 0">
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-label>Total Belanja</ion-label>
+      <ion-text slot="end" color="primary"><h2>Rp {{ cartService.getTotal() | number }}</h2></ion-text>
+    </ion-item>
+    <ion-button id="checkout-btn" expand="block" color="secondary" (click)="checkout()">
+      Konfirmasi Transaksi
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-alert
+  [isOpen]="showSuccess"
+  header="Transaksi Berhasil"
+  message="Transaksi telah disimpan ke riwayat."
+  [buttons]="[{ text: 'OK', handler: goToRiwayat.bind(this) }]"
+></ion-alert>
