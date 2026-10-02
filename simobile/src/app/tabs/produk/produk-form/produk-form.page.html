@@ -1,0 +1,93 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Tambah Produk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="form-container">
+    <h2>Form Produk</h2>
+    <p>Masukkan informasi produk yang ingin ditambahkan.</p>
+
+    <form [formGroup]="produkForm" (ngSubmit)="simpanProduk()">
+
+      <ion-item>
+        <ion-input
+          label="Nama Produk"
+          labelPlacement="stacked"
+          placeholder="Contoh: Kaos Polos"
+          formControlName="nama">
+        </ion-input>
+      </ion-item>
+
+      @if (produkForm.get('nama')?.touched &&
+           produkForm.get('nama')?.invalid) {
+        <ion-text color="danger">
+          <p class="error-text">Nama produk wajib diisi.</p>
+        </ion-text>
+      }
+
+      <ion-item>
+        <ion-input
+          label="Harga (Rp)"
+          labelPlacement="stacked"
+          type="number"
+          placeholder="Contoh: 50000"
+          formControlName="harga">
+        </ion-input>
+      </ion-item>
+
+      @if (produkForm.get('harga')?.touched &&
+           produkForm.get('harga')?.invalid) {
+        <ion-text color="danger">
+          <p class="error-text">Harga wajib diisi dan tidak boleh negatif.</p>
+        </ion-text>
+      }
+
+      <ion-item>
+        <ion-input
+          label="Stok"
+          labelPlacement="stacked"
+          type="number"
+          placeholder="Contoh: 20"
+          formControlName="stok">
+        </ion-input>
+      </ion-item>
+
+      @if (produkForm.get('stok')?.touched &&
+           produkForm.get('stok')?.invalid) {
+        <ion-text color="danger">
+          <p class="error-text">Stok wajib diisi dan tidak boleh negatif.</p>
+        </ion-text>
+      }
+
+      <ion-item>
+        <ion-textarea
+          label="Deskripsi"
+          labelPlacement="stacked"
+          placeholder="Deskripsi produk (opsional)"
+          formControlName="deskripsi"
+          [autoGrow]="true">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        type="submit"
+        class="save-button">
+        Simpan Produk
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        color="medium"
+        type="button"
+        (click)="produkForm.reset()">
+        Reset Form
+      </ion-button>
+
+    </form>
+  </div>
+</ion-content>
