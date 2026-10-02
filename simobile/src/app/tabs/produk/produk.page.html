@@ -1,13 +1,62 @@
 <ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Produk</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tabs/produk/form">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button routerLink="/tabs/keranjang">
+        <ion-icon slot="icon-only" name="cart-outline" [class.bump]="justBumped"></ion-icon>
+        <ion-badge color="secondary" *ngIf="cartService.getItemCount() > 0">
+          {{ cartService.getItemCount() }}
+        </ion-badge>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
   <ion-toolbar>
-    <ion-title>produk</ion-title>
+    <ion-searchbar
+      [(ngModel)]="keyword"
+      (ionInput)="onSearch()"
+      placeholder="Cari nama produk..."
+      debounce="0"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">produk</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list *ngIf="produkList.length > 0; else kosong">
+    <ion-item *ngFor="let p of produkList" button routerLink="/tabs/produk/detail/{{ p.id }}" detail="true">
+      <ion-thumbnail slot="start">
+        <img [src]="p.imageUrl || defaultImage" alt="{{ p.name }}" />
+      </ion-thumbnail>
+
+      <ion-label>
+        <h2>{{ p.name }}</h2>
+        <p>{{ p.category }} &middot; Stok: {{ p.stock }}</p>
+        <p><b>Rp {{ p.sellPrice | number }}</b></p>
+      </ion-label>
+
+      <ion-button
+        slot="end"
+        size="small"
+        fill="solid"
+        color="secondary"
+        [disabled]="p.stock === 0"
+        (click)="addToCart(p, $event)"
+      >
+        <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #kosong>
+    <div class="empty-state">
+      <ion-icon name="search-outline"></ion-icon>
+      <p>Produk "{{ keyword }}" tidak ditemukan</p>
+    </div>
+  </ng-template>
 </ion-content>
