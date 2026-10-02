@@ -1,13 +1,66 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>produk-form</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/produk"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isEdit ? 'Edit Produk' : 'Tambah Produk' }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">produk-form</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="produkForm" (ngSubmit)="submit()">
+    <ion-list lines="full">
+      <ion-item>
+        <ion-input label="Nama Produk" labelPlacement="stacked" placeholder="Contoh: Beras 5kg" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-text color="danger" class="err" *ngIf="f['name'].touched && f['name'].errors?.['required']">
+        Nama produk wajib diisi.
+      </ion-text>
+
+      <ion-item>
+        <ion-input label="Kategori" labelPlacement="stacked" placeholder="Contoh: Sembako" formControlName="category"></ion-input>
+      </ion-item>
+      <ion-text color="danger" class="err" *ngIf="f['category'].touched && f['category'].errors?.['required']">
+        Kategori wajib diisi.
+      </ion-text>
+
+      <ion-item>
+        <ion-input label="Harga Beli" labelPlacement="stacked" type="number" placeholder="0" formControlName="buyPrice"></ion-input>
+      </ion-item>
+      <ion-text color="danger" class="err" *ngIf="f['buyPrice'].touched && f['buyPrice'].errors?.['required']">
+        Harga beli wajib diisi.
+      </ion-text>
+      <ion-text color="danger" class="err" *ngIf="f['buyPrice'].touched && (f['buyPrice'].errors?.['pattern'] || f['buyPrice'].errors?.['min'])">
+        Harga beli harus berupa angka lebih dari 0.
+      </ion-text>
+
+      <ion-item>
+        <ion-input label="Harga Jual" labelPlacement="stacked" type="number" placeholder="0" formControlName="sellPrice"></ion-input>
+      </ion-item>
+      <ion-text color="danger" class="err" *ngIf="f['sellPrice'].touched && f['sellPrice'].errors?.['required']">
+        Harga jual wajib diisi.
+      </ion-text>
+      <ion-text color="danger" class="err" *ngIf="f['sellPrice'].touched && (f['sellPrice'].errors?.['pattern'] || f['sellPrice'].errors?.['min'])">
+        Harga jual harus berupa angka lebih dari 0.
+      </ion-text>
+
+      <ion-item>
+        <ion-input label="Stok" labelPlacement="stacked" type="number" placeholder="0" formControlName="stock"></ion-input>
+      </ion-item>
+      <ion-text color="danger" class="err" *ngIf="f['stock'].touched && f['stock'].errors?.['required']">
+        Stok wajib diisi.
+      </ion-text>
+      <ion-text color="danger" class="err" *ngIf="f['stock'].touched && (f['stock'].errors?.['pattern'] || f['stock'].errors?.['min'])">
+        Stok tidak boleh negatif.
+      </ion-text>
+
+      <ion-item>
+        <ion-input label="URL Gambar (opsional)" labelPlacement="stacked" type="url" placeholder="https://..." formControlName="imageUrl"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" type="submit" color="primary" class="submit-btn">
+      {{ isEdit ? 'Simpan Perubahan' : 'Tambah Produk' }}
+    </ion-button>
+  </form>
 </ion-content>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-profil',
@@ -6,11 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profil.page.scss'],
   standalone: false,
 })
-export class ProfilPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class ProfilPage {
+  pemilik = 'Bu Marni';
+  namaToko = 'Toko Makmur Jaya';
 }
