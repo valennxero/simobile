@@ -121,7 +121,7 @@ ionic serve
 | 6 | **Form tambah dan edit produk** | Reactive Form dengan validasi dan pesan error per field | ✅ |
 | 7 | **Angular Service** | 4 service: Product, Cart, Transaction, Theme | ✅ |
 | 8 | **Custom theme dan dark mode** | Palet hijau-kuning dan toggle mode gelap/terang | ✅ |
-| 9 | **Animasi** | Swipe-to-delete pada item keranjang | ✅ |
+| 9 | **Animasi** | Swipe-to-delete pada item keranjang dan Efek Bump pada Logo Keranjang | ✅ |
 | 10 | **Keranjang dan checkout** | Atur jumlah, total otomatis, konfirmasi transaksi | ✅ |
 | 11 | **Riwayat transaksi** | Daftar transaksi dan halaman detail tiap transaksi | ✅ |
 
