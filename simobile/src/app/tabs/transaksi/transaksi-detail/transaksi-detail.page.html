@@ -1,13 +1,34 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>transaksi-detail</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/transaksi"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail Transaksi</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">transaksi-detail</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding" *ngIf="trx; else notfound">
+  <h1>Transaksi #{{ trx.id }}</h1>
+  <p class="tanggal">{{ trx.date | date: 'dd MMMM yyyy, HH:mm' }}</p>
+
+  <ion-list lines="full" inset="true">
+    <ion-item *ngFor="let it of trx.items">
+      <ion-label>
+        <h2>{{ it.productName }}</h2>
+        <p>{{ it.qty }} x Rp {{ it.price | number }}</p>
+      </ion-label>
+      <ion-text slot="end"><b>Rp {{ it.qty * it.price | number }}</b></ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-item lines="none" class="total-item">
+    <ion-label>Total</ion-label>
+    <ion-text slot="end" color="primary"><h2>Rp {{ trx.total | number }}</h2></ion-text>
+  </ion-item>
 </ion-content>
+
+<ng-template #notfound>
+  <ion-content class="ion-padding">
+    <p>Transaksi tidak ditemukan.</p>
+  </ion-content>
+</ng-template>

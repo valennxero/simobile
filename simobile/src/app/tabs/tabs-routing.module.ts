@@ -55,7 +55,8 @@ const routes: Routes = [
         pathMatch: 'full',
       },
     ],
-  },  {
+  },
+  {
     path: 'produk',
     loadChildren: () => import('./produk/produk.module').then( m => m.ProdukPageModule)
   },

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Transaction } from '../../models/transaction';
+import { TransactionService } from '../../services/transaction';
 
 @Component({
   selector: 'app-transaksi',
@@ -6,11 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transaksi.page.scss'],
   standalone: false,
 })
-export class TransaksiPage implements OnInit {
+export class TransaksiPage {
+  riwayat: Transaction[] = [];
 
-  constructor() { }
+  constructor(private transactionService: TransactionService) {}
 
-  ngOnInit() {
+  ionViewWillEnter() {
+    this.riwayat = this.transactionService.getAll();
   }
-
 }

@@ -1,13 +1,28 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>transaksi</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Riwayat Transaksi</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">transaksi</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list *ngIf="riwayat.length > 0; else kosong">
+    <ion-item *ngFor="let trx of riwayat" button routerLink="/tabs/transaksi/detail/{{ trx.id }}" detail="true">
+      <ion-icon name="receipt-outline" slot="start" color="primary"></ion-icon>
+      <ion-label>
+        <h2>Transaksi #{{ trx.id }}</h2>
+        <p>{{ trx.date | date: 'dd MMM yyyy, HH:mm' }} &middot; {{ trx.items.length }} item</p>
+      </ion-label>
+      <ion-text slot="end" color="primary"><b>Rp {{ trx.total | number }}</b></ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #kosong>
+    <div class="empty-state">
+      <ion-icon name="receipt-outline"></ion-icon>
+      <p>Belum ada transaksi</p>
+    </div>
+  </ng-template>
 </ion-content>
