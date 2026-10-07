@@ -16,7 +16,7 @@ export class KeranjangPage {
     private transactionService: TransactionService,
     private router: Router,
     private alertController: AlertController
-  ) {}
+  ) { }
 
   increase(id: number) {
     this.cartService.increaseQty(id);
@@ -39,12 +39,16 @@ export class KeranjangPage {
     const alert = await this.alertController.create({
       header: 'Transaksi Berhasil',
       message: 'Transaksi telah disimpan ke riwayat.',
-      buttons: ['OK'],
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.router.navigate(['/tabs/transaksi']);
+          },
+        },
+      ],
     });
 
     await alert.present();
-    await alert.onDidDismiss();
-
-    this.router.navigate(['/tabs/transaksi']);
   }
 }

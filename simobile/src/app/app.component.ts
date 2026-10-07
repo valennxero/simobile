@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { ThemeService } from './services/theme';
 
 @Component({
@@ -9,25 +9,18 @@ import { ThemeService } from './services/theme';
   standalone: false,
 })
 export class AppComponent {
+  // dua tombol pada ion-alert konfirmasi logout (contoh pemakaian ion-alert seperti diajarkan di kelas)
   logoutButtons = [
     { text: 'Batal', role: 'cancel' },
     {
       text: 'Ya, Logout',
       role: 'confirm',
       handler: () => {
+        // Simulasi logout: kembali ke Dashboard (tidak ada backend/auth pada UTS ini)
         this.router.navigate(['/tabs/dashboard']);
       },
     },
   ];
 
-  constructor(public themeService: ThemeService, private router: Router) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        console.log('🚀 NAVIGATION START ke:', event.url);
-      }
-      if (event instanceof NavigationEnd) {
-        console.log('✅ NAVIGATION END di:', event.urlAfterRedirects);
-      }
-    });
-  }
+  constructor(public themeService: ThemeService, private router: Router) {}
 }

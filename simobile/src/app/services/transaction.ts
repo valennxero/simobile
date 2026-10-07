@@ -46,25 +46,18 @@ export class TransactionService {
     return this.transactions.find((t) => t.id === id);
   }
 
-private isToday(d: Date): boolean {
-  const today = new Date();
-  const hasil = (
-    d.getFullYear() === today.getFullYear() &&
-    d.getMonth() === today.getMonth() &&
-    d.getDate() === today.getDate()
-  );
-  console.log('isToday cek:', d, 'vs today:', today, '-> hasil:', hasil);
-  return hasil;
-}
+  private isToday(d: Date): boolean {
+    const today = new Date();
+    return (
+      d.getFullYear() === today.getFullYear() &&
+      d.getMonth() === today.getMonth() &&
+      d.getDate() === today.getDate()
+    );
+  }
 
-getTodayCount(): number {
-  console.log('--- getTodayCount dipanggil ---');
-  console.log('Semua transaksi (this.transactions):', this.transactions);
-  console.log('Jumlah total transaksi:', this.transactions.length);
-  const hariIni = this.transactions.filter((t) => this.isToday(t.date));
-  console.log('Transaksi yang dianggap "hari ini":', hariIni);
-  return hariIni.length;
-}
+  getTodayCount(): number {
+    return this.transactions.filter((t) => this.isToday(t.date)).length;
+  }
 
   getTodayTotal(): number {
     return this.transactions
