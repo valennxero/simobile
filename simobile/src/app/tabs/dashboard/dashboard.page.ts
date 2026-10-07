@@ -11,33 +11,24 @@ import { TransactionService } from '../../services/transaction';
 export class DashboardPage {
   today = new Date();
 
-  totalTransaksiHariIni = this.transactionService.getTodayCount();
-  omzetHariIni = this.transactionService.getTodayTotal();
-  produkTerlaris = this.transactionService.getBestSellerToday();
-
   constructor(
     private productService: ProductService,
     private transactionService: TransactionService
   ) {}
 
-ionViewWillEnter() {
-  console.log('DASHBOARD ionViewWillEnter dipanggil');
-
-  this.totalTransaksiHariIni =
-    this.transactionService.getTodayCount();
-
-  this.omzetHariIni =
-    this.transactionService.getTodayTotal();
-
-  this.produkTerlaris =
-    this.transactionService.getBestSellerToday();
-
-  console.log('Total transaksi:', this.totalTransaksiHariIni);
-  console.log('Omzet:', this.omzetHariIni);
-  console.log('Produk terlaris:', this.produkTerlaris);
-}
-
-  get totalProduk(): number {
+  totalProduk(): number {
     return this.productService.getAll().length;
+  }
+
+  totalTransaksiHariIni(): number {
+    return this.transactionService.getTodayCount();
+  }
+
+  omzetHariIni(): number {
+    return this.transactionService.getTodayTotal();
+  }
+
+  produkTerlaris(): string {
+    return this.transactionService.getBestSellerToday();
   }
 }
