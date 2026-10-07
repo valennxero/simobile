@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductService } from '../../services/product';
 import { TransactionService } from '../../services/transaction';
 
@@ -11,29 +11,33 @@ import { TransactionService } from '../../services/transaction';
 export class DashboardPage {
   today = new Date();
 
+  totalTransaksiHariIni = this.transactionService.getTodayCount();
+  omzetHariIni = this.transactionService.getTodayTotal();
+  produkTerlaris = this.transactionService.getBestSellerToday();
+
   constructor(
     private productService: ProductService,
-    private transactionService: TransactionService,
-    private ngZone: NgZone
+    private transactionService: TransactionService
   ) {}
 
-  ionViewWillEnter() {
-    this.ngZone.run(() => {});
-  }
+ionViewWillEnter() {
+  console.log('DASHBOARD ionViewWillEnter dipanggil');
+
+  this.totalTransaksiHariIni =
+    this.transactionService.getTodayCount();
+
+  this.omzetHariIni =
+    this.transactionService.getTodayTotal();
+
+  this.produkTerlaris =
+    this.transactionService.getBestSellerToday();
+
+  console.log('Total transaksi:', this.totalTransaksiHariIni);
+  console.log('Omzet:', this.omzetHariIni);
+  console.log('Produk terlaris:', this.produkTerlaris);
+}
 
   get totalProduk(): number {
     return this.productService.getAll().length;
-  }
-
-  get totalTransaksiHariIni(): number {
-    return this.transactionService.getTodayCount();
-  }
-
-  get omzetHariIni(): number {
-    return this.transactionService.getTodayTotal();
-  }
-
-  get produkTerlaris(): string {
-    return this.transactionService.getBestSellerToday();
   }
 }
