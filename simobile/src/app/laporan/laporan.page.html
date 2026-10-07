@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Laporan Penjualan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list lines="full">
+    <ion-item>
+      <ion-label>
+        <h2>Total Transaksi Hari Ini</h2>
+        <p>{{ today | date:'dd MMMM yyyy' }}</p>
+      </ion-label>
+      <ion-note slot="end" color="primary" style="font-size: 18px; font-weight: bold;">
+        {{ totalTransaksi }}
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Total Omzet Hari Ini</h2>
+        <p>Akumulasi penjualan hari ini</p>
+      </ion-label>
+      <ion-note slot="end" color="success" style="font-size: 18px; font-weight: bold;">
+        Rp {{ totalOmzet | number }}
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Produk Terlaris</h2>
+        <p>Item paling banyak dibeli</p>
+      </ion-label>
+      <ion-note slot="end" color="dark" style="font-size: 16px;">
+        {{ produkTerlaris }}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

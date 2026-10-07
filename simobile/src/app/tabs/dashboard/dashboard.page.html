@@ -9,7 +9,17 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <p class="tanggal">Ringkasan hari ini, {{ today | date: 'dd MMMM yyyy' }}</p>
-
+<!-- Tombol Akses Laporan -->
+  <ion-card class="ion-no-margin ion-margin-top" color="light" routerLink="/laporan" routerDirection="forward" style="cursor: pointer;">
+    <ion-item lines="none" color="light">
+      <ion-icon name="analytics-outline" slot="start" color="primary" style="font-size: 28px;"></ion-icon>
+      <ion-label>
+        <h2 style="font-weight: bold;">Laporan Penjualan</h2>
+        <p>Lihat rekap & ringkasan transaksi</p>
+      </ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-card>
   <ion-grid>
     <ion-row>
       <ion-col size="6">

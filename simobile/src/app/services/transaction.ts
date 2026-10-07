@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { CartItem } from '../models/cart-item';
 import { Transaction, TransactionItem } from '../models/transaction';
 import { ProductService } from './product';
@@ -10,7 +11,15 @@ export class TransactionService {
   private transactions: Transaction[] = [];
   private nextId = 1;
 
+  // 1. BehaviorSubject untuk memancar perubahan transaksi
+  private transactions$ = new BehaviorSubject<Transaction[]>([]);
+
   constructor(private productService: ProductService) {}
+
+  // 2. Observable yang di-subscribe oleh Dashboard
+  getTransactions$(): Observable<Transaction[]> {
+    return this.transactions$.asObservable();
+  }
 
   checkout(cartItems: CartItem[]): Transaction {
     const items: TransactionItem[] = cartItems.map((ci) => ({
@@ -32,6 +41,9 @@ export class TransactionService {
     this.transactions.unshift(trx);
     console.log('checkout: jumlah transaksi =', this.transactions.length);
 
+    // 3. Pancarkan data transaksi terbaru ke semua subscriber
+    this.transactions$.next(this.transactions);
+
     // Kurangi stok produk sesuai barang yang terjual
     cartItems.forEach((ci) => this.productService.reduceStock(ci.product.id, ci.qty));
 
@@ -46,12 +58,14 @@ export class TransactionService {
     return this.transactions.find((t) => t.id === id);
   }
 
-  private isToday(d: Date): boolean {
+  private isToday(d: Date | string): boolean {
+    if (!d) return false;
+    const dateObj = new Date(d); // Memastikan format objek Date aman
     const today = new Date();
     return (
-      d.getFullYear() === today.getFullYear() &&
-      d.getMonth() === today.getMonth() &&
-      d.getDate() === today.getDate()
+      dateObj.getFullYear() === today.getFullYear() &&
+      dateObj.getMonth() === today.getMonth() &&
+      dateObj.getDate() === today.getDate()
     );
   }
 

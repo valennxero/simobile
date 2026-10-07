@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'tentang',
     loadChildren: () => import('./tentang/tentang.module').then((m) => m.TentangPageModule),
   },
+  {
+    path: 'laporan',
+    loadChildren: () => import('./laporan/laporan.module').then( m => m.LaporanPageModule)
+  },
 ];
 
 @NgModule({
