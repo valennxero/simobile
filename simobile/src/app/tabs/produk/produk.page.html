@@ -18,12 +18,7 @@
   </ion-toolbar>
 
   <ion-toolbar>
-    <ion-searchbar
-      [(ngModel)]="keyword"
-      (ionInput)="onSearch()"
-      placeholder="Cari nama produk..."
-      debounce="0"
-    ></ion-searchbar>
+    <ion-searchbar [(ngModel)]="keyword" placeholder="Cari nama produk..." debounce="0"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -40,14 +35,8 @@
         <p><b>Rp {{ p.sellPrice | number }}</b></p>
       </ion-label>
 
-      <ion-button
-        slot="end"
-        size="small"
-        fill="solid"
-        color="secondary"
-        [disabled]="p.stock === 0"
-        (click)="addToCart(p, $event)"
-      >
+      <ion-button slot="end" size="small" fill="solid" color="secondary" [disabled]="p.stock === 0"
+        (click)="addToCart(p, $event)">
         <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
       </ion-button>
     </ion-item>

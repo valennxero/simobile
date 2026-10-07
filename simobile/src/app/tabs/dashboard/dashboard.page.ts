@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { ProductService } from '../../services/product';
 import { TransactionService } from '../../services/transaction';
-
 
 @Component({
   selector: 'app-dashboard',
@@ -9,29 +8,32 @@ import { TransactionService } from '../../services/transaction';
   styleUrls: ['./dashboard.page.scss'],
   standalone: false,
 })
-export class DashboardPage implements OnInit {
-  // Nilai-nilai berikut dihitung oleh service lalu ditampilkan dengan interpolation binding di HTML
-  totalProduk = 0;
-  totalTransaksiHariIni = 0;
-  omzetHariIni = 0;
-  produkTerlaris = '-';
+export class DashboardPage {
   today = new Date();
 
-  constructor(private productService: ProductService, private transactionService: TransactionService, private cdr: ChangeDetectorRef) { }
-
-  ngOnInit() {
-    this.refresh();
-  }
+  constructor(
+    private productService: ProductService,
+    private transactionService: TransactionService,
+    private ngZone: NgZone
+  ) {}
 
   ionViewWillEnter() {
-    this.refresh();
-    this.cdr.detectChanges();
+    this.ngZone.run(() => {});
   }
 
-  refresh() {
-    this.totalProduk = this.productService.getAll().length;
-    this.totalTransaksiHariIni = this.transactionService.getTodayCount();
-    this.omzetHariIni = this.transactionService.getTodayTotal();
-    this.produkTerlaris = this.transactionService.getBestSellerToday();
+  get totalProduk(): number {
+    return this.productService.getAll().length;
+  }
+
+  get totalTransaksiHariIni(): number {
+    return this.transactionService.getTodayCount();
+  }
+
+  get omzetHariIni(): number {
+    return this.transactionService.getTodayTotal();
+  }
+
+  get produkTerlaris(): string {
+    return this.transactionService.getBestSellerToday();
   }
 }
