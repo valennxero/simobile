@@ -11,9 +11,9 @@ import { TransactionService } from '../../services/transaction';
 export class DashboardPage {
   today = new Date();
 
-  totalTransaksiHariIni = this.transactionService.getTodayCount();
-  omzetHariIni = this.transactionService.getTodayTotal();
-  produkTerlaris = this.transactionService.getBestSellerToday();
+  totalTransaksiHariIni = 0;
+  omzetHariIni = 0;
+  produkTerlaris = '';
 
   constructor(
     private productService: ProductService,
