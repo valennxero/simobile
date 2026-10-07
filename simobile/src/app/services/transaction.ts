@@ -9,11 +9,8 @@ import { ProductService } from './product';
 export class TransactionService {
   private transactions: Transaction[] = [];
   private nextId = 1;
-  public instanceId = Math.random().toString(36).substring(7); // TAMBAHKAN INI
 
-  constructor(private productService: ProductService) {
-    console.log('🏭 TransactionService DIBUAT, instanceId:', this.instanceId);
-  }
+  constructor(private productService: ProductService) {}
 
   checkout(cartItems: CartItem[]): Transaction {
     const items: TransactionItem[] = cartItems.map((ci) => ({

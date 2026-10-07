@@ -32,7 +32,7 @@ export class KeranjangPage {
 
   async checkout() {
     if (this.cartService.getItems().length === 0) return;
-    console.log('🛒 KERANJANG pakai TransactionService instanceId:', (this.transactionService as any).instanceId);
+
     this.transactionService.checkout(this.cartService.getItems());
     this.cartService.clearCart();
 
