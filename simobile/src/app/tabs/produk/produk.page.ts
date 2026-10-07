@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product';
@@ -11,9 +11,7 @@ import { CartService } from '../../services/cart';
   standalone: false,
 })
 export class ProdukPage implements OnInit {
-  // Gambar default untuk produk yang belum difoto (property binding, tidak boleh error)
   defaultImage = 'https://ubaya.cloud/no_image.jpg';
-
   keyword = '';
   produkList: Product[] = [];
   justBumped = false;
@@ -21,26 +19,17 @@ export class ProdukPage implements OnInit {
   constructor(
     private productService: ProductService,
     public cartService: CartService,
-    private router: Router,
-    private cdr: ChangeDetectorRef
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.produkList = this.productService.getAll();
   }
 
-  ionViewWillEnter() {
-    // refresh setiap kembali ke halaman ini (mis. setelah menambah/edit produk)
-    this.onSearch();
-    this.cdr.detectChanges();
-  }
-
-  // Pencarian real-time: two-way binding (ngModel) di HTML, tanpa tombol submit
   onSearch() {
     this.produkList = this.productService.search(this.keyword);
   }
 
-  // Navigasi ke detail produk (dipanggil dari thumbnail/label, bukan dari ion-item langsung)
   goDetail(id: number) {
     this.router.navigate(['/tabs/produk/detail', id]);
   }
@@ -49,12 +38,7 @@ export class ProdukPage implements OnInit {
     ev.stopPropagation();
     if (product.stock <= 0) return;
     this.cartService.addToCart(product);
-
-    // animasi kecil saat item masuk keranjang (bump pada ikon keranjang)
     this.justBumped = true;
-         setTimeout(() => {
-       this.justBumped = false;
-       this.cdr.detectChanges();
-     }, 350);
+    setTimeout(() => (this.justBumped = false), 350);
   }
 }
