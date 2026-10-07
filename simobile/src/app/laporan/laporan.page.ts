@@ -15,7 +15,6 @@ export class LaporanPage implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
-    // Memastikan data segar setiap kali halaman dibuka
   }
 
   get totalTransaksi(): number {
